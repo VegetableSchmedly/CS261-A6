@@ -90,21 +90,42 @@ class HashMap:
 
     def put(self, key: str, value: object) -> None:
         """
-        TODO: Write this implementation
+        Updates the key/value pair in the hash map. If key already exists, associated value will be replaced.
+        If key is not in map, new pair will be added.
+        :param key: Key to be updated.
+        :param value: Value to be updated to associate with key.
+        :return: None
         """
-        pass
+        if self.table_load() >= 1.0:
+            self.resize_table(self._capacity * 2)
+
+        index = self._hash_function(key) % self._capacity
+        if self._buckets[index].contains(key) is None:
+            self._buckets[index].insert(key, value)
+            self._size += 1
 
     def empty_buckets(self) -> int:
         """
-        TODO: Write this implementation
+        Returns the number of empty buckets in the hash table.
+        :return: Number of empty buckets
         """
-        pass
+        count = 0
+        for i in range(0, self._capacity):
+            if self._buckets[i].length() == 0:
+                count += 1
+        return count
 
     def table_load(self) -> float:
         """
-        TODO: Write this implementation
+        Returns the table load
+        :return: Float of table load.
         """
-        pass
+        elements = 0
+        for i in range(self._capacity):
+            elements += self._buckets[i].length()
+
+        return float(elements/self._capacity)
+
 
     def clear(self) -> None:
         """
@@ -114,9 +135,37 @@ class HashMap:
 
     def resize_table(self, new_capacity: int) -> None:
         """
-        TODO: Write this implementation
+        Resizes the hash table to the new capacity, or the next prime number after it.
+        :param new_capacity: New capacity
+        :return:
         """
-        pass
+        # Save old buckets for rehashing linked list nodes.
+        old_da = DynamicArray()
+        for index in range(self._buckets.length()):
+            old_da.append(self._buckets[index])
+        # Make sure new capacity is valid and prime.
+        if new_capacity < 1:
+            return
+        elif self._is_prime(new_capacity) is False:
+            new_capacity = self._next_prime(new_capacity)
+
+        self._capacity = new_capacity
+
+        # Add empty linked lists up to new capacity.
+        for i in range(0, new_capacity):
+            self._buckets.append(LinkedList())
+        # Reset size before rehashing.
+        self._size = 0
+        # Look for active linked lists and iterate through them, rehashing their key/value pairs.
+        for index in range(old_da.length()):
+            if old_da.length() > 0:
+                for node in old_da[index]:
+                    self.put(node.key, node.value)
+
+
+
+
+
 
     def get(self, key: str):
         """

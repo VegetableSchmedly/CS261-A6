@@ -3,7 +3,7 @@
 # Course: CS261 - Data Structures
 # Assignment: 6 - Hashmaps
 # Due Date: June 9, 2023
-# Description: Hashmap using open addressing to solve collisions.
+# Description: Hashmap using open addressing with quadratic probing to solve collisions.
 
 from a6_include import (DynamicArray, DynamicArrayException, HashEntry,
                         hash_function_1, hash_function_2)
