@@ -37,9 +37,9 @@ class DynamicArray:
         """
         return None
 
-    def __str__(self) -> str:
-        """Override string method to provide more readable output."""
-        return str(self._data)
+    # def __str__(self) -> str:
+    #     """Override string method to provide more readable output."""
+    #     return str(self._data)
 
     def __repr__(self):
         out = ''
@@ -225,5 +225,9 @@ class HashEntry:
         self.is_tombstone = False
 
     def __str__(self) -> str:
+        """Override string method to provide more readable output."""
+        return f"K: {self.key} V: {self.value} TS: {self.is_tombstone}"
+
+    def __repr__(self):
         """Override string method to provide more readable output."""
         return f"K: {self.key} V: {self.value} TS: {self.is_tombstone}"
