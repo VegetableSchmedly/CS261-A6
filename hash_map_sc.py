@@ -160,12 +160,15 @@ class HashMap:
         self._capacity = new_capacity
 
         # Clear buckets up to old length.
-        for i in range(0, old_da.length()):
-            self._buckets.set_at_index(i, LinkedList())
-        # Add empty buckets up to new capacity.
-        for i in range(old_da.length(), new_capacity):
+        # for i in range(0, old_da.length()):
+        #     self._buckets.set_at_index(i, LinkedList())
+        # # Add empty buckets up to new capacity.
+        # for i in range(old_da.length(), new_capacity):
+        #     self._buckets.append(LinkedList())
+        # # Reset size before rehashing.
+        self._buckets = DynamicArray()
+        for i in range(0, new_capacity):
             self._buckets.append(LinkedList())
-        # Reset size before rehashing.
         self._size = 0
         # Look for active linked lists and iterate through them, rehashing their key/value pairs.
         for index in range(old_da.length()):
