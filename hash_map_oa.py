@@ -233,7 +233,7 @@ class HashMap:
         Returns a DA where each index contains a tuple of key/value pairs stored in the hashmap.
         :return: Dynamic Array of Tuples: (Key, Value).
         """
-        # kv_da = DynamicArray()
+        kv_da = DynamicArray()
         # elements = 0
         # flag = False
         # # Quadratic Probing starting at index 0.
@@ -253,9 +253,12 @@ class HashMap:
         #     flag = False
         #     index = (initial_index + count**2) % self._capacity
         #     count += 1
-        #
-        # return kv_da
-        pass
+        for i in range(self._capacity):
+            if self._buckets[i]:
+                if not self._buckets[i].is_tombstone:
+                    kv_da.append((self._buckets[i].key, self._buckets[i].value))
+        return kv_da
+
 
     def __iter__(self):
         """

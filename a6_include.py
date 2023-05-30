@@ -37,15 +37,15 @@ class DynamicArray:
         """
         return None
 
-    # def __str__(self) -> str:
-    #     """Override string method to provide more readable output."""
-    #     return str(self._data)
+    def __str__(self) -> str:
+        """Override string method to provide more readable output."""
+        return str(self._data)
 
-    def __repr__(self):
-        out = ''
-        for i in range(self.length()):
-            out += str(i) + ': ' + str(self._data[i]) + '\n'
-        return out
+    # def __repr__(self):
+    #     out = ''
+    #     for i in range(self.length()):
+    #         out += str(i) + ': ' + str(self._data[i]) + '\n'
+    #     return out
 
     def append(self, value: object) -> None:
         """Add new element at the end of the array."""
@@ -228,6 +228,6 @@ class HashEntry:
         """Override string method to provide more readable output."""
         return f"K: {self.key} V: {self.value} TS: {self.is_tombstone}"
 
-    def __repr__(self):
-        """Override string method to provide more readable output."""
-        return f"K: {self.key} V: {self.value} TS: {self.is_tombstone}"
+    # def __repr__(self):
+    #     """Override string method to provide more readable output."""
+    #     return f"K: {self.key} V: {self.value} TS: {self.is_tombstone}"
