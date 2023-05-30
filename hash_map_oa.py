@@ -100,6 +100,8 @@ class HashMap:
         while self._buckets[index]:
             if self._buckets[index].key == key:
                 self._buckets[index].value = value
+                if self._buckets[index].is_tombstone is True:
+                    self._buckets[index].is_tombstone = False
                 return
             elif self._buckets[index].is_tombstone is True:
                 self._buckets[index] = HashEntry(key, value)
