@@ -102,6 +102,7 @@ class HashMap:
                 self._buckets[index].value = value
                 if self._buckets[index].is_tombstone is True:
                     self._buckets[index].is_tombstone = False
+                    self._size += 1
                 return
             elif self._buckets[index].is_tombstone is True:
                 self._buckets[index] = HashEntry(key, value)
