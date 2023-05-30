@@ -147,11 +147,8 @@ class HashMap:
         :param new_capacity: New capacity
         :return:
         """
-        # Save old buckets for rehashing linked list nodes.
-        old_da = DynamicArray()
-        for index in range(self._buckets.length()):
-            old_da.append(self._buckets[index])
-
+        # Save old hashmap for rehashing linked list nodes.
+        old_da = self._buckets
         # Make sure new capacity is valid and prime.
         if new_capacity < 1:
             return
