@@ -103,6 +103,10 @@ class HashMap:
         if self._buckets[index].contains(key) is None:
             self._buckets[index].insert(key, value)
             self._size += 1
+        elif self._buckets[index].contains(key):
+            for node in self._buckets[index]:
+                if node.key == key:
+                    node.value = value
 
     def empty_buckets(self) -> int:
         """
@@ -151,9 +155,10 @@ class HashMap:
 
         self._capacity = new_capacity
 
-        # Add empty linked lists up to new capacity.
+        # Clear buckets up to old length.
         for i in range(0, old_da.length()):
             self._buckets.set_at_index(i, LinkedList())
+        # Add empty buckets up to new capacity.
         for i in range(old_da.length(), new_capacity):
             self._buckets.append(LinkedList())
         # Reset size before rehashing.
