@@ -149,9 +149,8 @@ class HashMap:
             new_capacity = self._next_prime(new_capacity)
 
         # Save old Dynamic Array.
-        old_da = DynamicArray()
-        for i in range(self._capacity):
-            old_da.append(self._buckets[i])
+        old_da = self._buckets
+
         # Update capacity.
         self._capacity = new_capacity
 
