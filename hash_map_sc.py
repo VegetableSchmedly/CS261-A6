@@ -220,6 +220,7 @@ class HashMap:
                     kv_da.append((node.key, node.value))
         return kv_da
 
+
 def find_mode(da: DynamicArray) -> (DynamicArray, int):
     """
     Returns a tuple containing a DA comprised of the mode value(s) and the frequency.
@@ -236,15 +237,19 @@ def find_mode(da: DynamicArray) -> (DynamicArray, int):
         # Get current frequency of that key and increase it by 1.
         freq = map.get(da[i])
         freq += 1
-        # Increase mode frequency and reset the mode_da if you find a new mode.
-        if freq > mode_freq:
-            mode_freq = freq
-            mode_da = DynamicArray()
-            mode_da.append(da[i])
-        # append key to mode_da if freq == mode freq
-        elif freq == mode_freq:
-            mode_da.append(da[i])
         map.put(da[i], freq)
+
+    kv_da = map.get_keys_and_values()
+    # Create DA for the modes.
+    for i in range(kv_da.length()):
+        if kv_da[i][1] > mode_freq:
+            mode_da = DynamicArray()
+            mode_da.append(kv_da[i][0])
+            mode_freq = kv_da[i][1]
+        elif kv_da[i][1] == mode_freq:
+            mode_da.append(kv_da[i][0])
+
+
 
     return (mode_da, mode_freq)
 

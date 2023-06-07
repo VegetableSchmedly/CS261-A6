@@ -233,25 +233,6 @@ class HashMap:
         :return: Dynamic Array of Tuples: (Key, Value).
         """
         kv_da = DynamicArray()
-        # elements = 0
-        # flag = False
-        # # Quadratic Probing starting at index 0.
-        # initial_index = 0
-        # index = initial_index
-        # count = 0
-        # while elements < self._size:
-        #     # Avoid empty indexes and Tombstones.
-        #     if self._buckets[index]:
-        #         if self._buckets[index].is_tombstone is False:
-        #             for j in range(kv_da.length()):
-        #                 if kv_da[j][0] == self._buckets[index].key:
-        #                     flag = True
-        #             if not flag:
-        #                 kv_da.append((self._buckets[index].key, self._buckets[index].value))
-        #                 elements += 1
-        #     flag = False
-        #     index = (initial_index + count**2) % self._capacity
-        #     count += 1
         for i in range(self._capacity):
             if self._buckets[i]:
                 if not self._buckets[i].is_tombstone:
