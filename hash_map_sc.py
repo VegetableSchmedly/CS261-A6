@@ -99,6 +99,7 @@ class HashMap:
         if self.table_load() >= 1.0:
             self.resize_table(self._capacity * 2)
 
+        # Determine index and check if key already exists.
         index = self._hash_function(key) % self._capacity
         if self._buckets[index].contains(key) is None:
             self._buckets[index].insert(key, value)

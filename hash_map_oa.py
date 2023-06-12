@@ -92,11 +92,13 @@ class HashMap:
         :param value: Value of HashEntry object
         :return: None
         """
+        # Check if resize needed.
         if self.table_load() >= 0.5:
             self.resize_table(self._capacity*2)
         initial_index = self._hash_function(key) % self._capacity
         index = initial_index
         count = 0
+        # Quadratic Probing Loop
         while self._buckets[index]:
             if self._buckets[index].key == key:
                 self._buckets[index].value = value
@@ -110,6 +112,7 @@ class HashMap:
                 return
             index = (initial_index + count**2) % self._capacity
             count += 1
+        # Once empty slot is found, add the HashEntry to it.
         self._buckets[index] = HashEntry(key, value)
         self._size += 1
 
@@ -173,7 +176,9 @@ class HashMap:
         initial_index = self._hash_function(key) % self._capacity
         index = initial_index
         count = 0
+        # Quadratic Probing Loop
         while self._buckets[index]:
+            # If key is found, and it is not a tombstone, return value.
             if self._buckets[index].key == key and not self._buckets[index].is_tombstone:
                 return self._buckets[index].value
             index = (initial_index + count**2) % self._capacity
@@ -188,6 +193,7 @@ class HashMap:
         initial_index = self._hash_function(key) % self._capacity
         index = initial_index
         count = 0
+        # Quadratic Probing Loop
         while self._buckets[index]:
             if self._buckets[index].key == key and not self._buckets[index].is_tombstone:
                 return True
@@ -233,6 +239,7 @@ class HashMap:
         :return: Dynamic Array of Tuples: (Key, Value).
         """
         kv_da = DynamicArray()
+        # Loop through buckets, only appending the non-tombstone slots.
         for i in range(self._capacity):
             if self._buckets[i]:
                 if not self._buckets[i].is_tombstone:
